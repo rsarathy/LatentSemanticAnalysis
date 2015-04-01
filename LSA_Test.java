@@ -22,10 +22,18 @@ public class LSA_Test
 		mn.print();
 		System.out.println();
 		mn.transpose().print();
+		System.out.println();
 		
-//		Matrix AB = new Matrix(a).multiply(new Matrix(b));
-//		AB.print();
-
+		Matrix A = new Matrix(a);
+		A.print(); 
+		System.out.println();
+		
+		Matrix B = new Matrix(b);
+		B.print(); 
+		System.out.println();
+		
+		Matrix AB = A.multiply(B);
+		AB.print();
 		
 		long endTime = System.currentTimeMillis();
 		System.out.println("The program took " + (endTime - startTime) + " ms to compile."); 
