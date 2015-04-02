@@ -1,25 +1,25 @@
 public class Matrix
 {
-	private int[][] mat;
+	private double[][] mat;
 
-	public Matrix(int[][] newA)
+	public Matrix(double[][] newA)
 	{
-		this.mat = new int[newA.length][newA[0].length];
-		for (int i = 0; i < this.mat.length; i++)
-			for (int j = 0; j < this.mat[0].length; j++)
-				this.mat[i][j] = newA[i][j];
+		mat = new double[newA.length][newA[0].length];
+		for (int i = 0; i < mat.length; i++)
+			for (int j = 0; j < mat[0].length; j++)
+				mat[i][j] = newA[i][j];
 	}
 
 	public Matrix transpose()
 	{
-		int[][] transposeM = new int[this.mat[0].length][this.mat.length];
+		double[][] transposeM = new double[mat[0].length][mat.length];
 		// a11 a12 a13 a14
 		// a21 a22 a23 a24
 		// a31 a32 a33 a34
 
-		for (int i = 0; i < this.mat[0].length; i++)
-			for (int j = 0; j < this.mat.length; j++)
-				transposeM[i][j] = this.mat[j][i];
+		for (int i = 0; i < mat[0].length; i++)
+			for (int j = 0; j < mat.length; j++)
+				transposeM[i][j] = mat[j][i];
 
 		// a11 a21 a13
 		// a12 a22 a23
@@ -42,9 +42,21 @@ public class Matrix
 					+ " computed due to mismatched matrix dimensions.");
 			return;
 		}
-		for (int i = 0; i < this.mat.length; i++)
-			for (int j = 0; j < this.mat[0].length; j++)
-				this.mat[i][j] += other.mat[i][j];
+		for (int i = 0; i < mat.length; i++)
+			for (int j = 0; j < mat[0].length; j++)
+				mat[i][j] += other.mat[i][j];
+	}
+	
+	/**
+	 * Inplace scalar multiplication of a matrix.
+	 * 
+	 * @param c - scalar constant
+	 */
+	public void scalar(double c)
+	{
+		for ( int i = 0; i < mat.length; i++ )
+			for ( int j = 0; j < mat[0].length; j++ )
+				mat[i][j] *= c;
 	}
 
 	/**
@@ -62,27 +74,27 @@ public class Matrix
 					+ " computed due to mismatched matrix dimensions.");
 		}
 
-		int m = this.mat.length;
-		int n = this.mat[0].length;
+		int m = mat.length;
+		int n = mat[0].length;
 		int p = other.mat[0].length;
 
-		int[][] AB = new int[m][p]; // m x n * n x p = m x p
+		double[][] AB = new double[m][p]; // m x n * n x p = m x p
 
 		for (int i = 0; i < m; i++)
 			for (int j = 0; j < p; j++)
 				for (int k = 0; k < n; k++)
-					AB[i][j] += this.mat[i][k] * other.mat[k][j];
+					AB[i][j] += mat[i][k] * other.mat[k][j];
 
 		return new Matrix(AB);
 	}
 
 	public void print()
 	{
-		for (int[] row : this.mat)
+		for (double[] row : mat)
 			printRow(row);
 	}
 
-	private static void printRow(int[] row)
+	private static void printRow(double[] row)
 	{
 		System.out.print("[");
 		for (int i = 0; i < row.length - 1; i++)

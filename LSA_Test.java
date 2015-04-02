@@ -8,12 +8,12 @@ public class LSA_Test
 	{
 		long startTime = System.currentTimeMillis();
 		
-		int[][] arr = {{3,-1,2,0},
+		double[][] arr = {{3,-1,2,0},
 						{5,-3,4,-6},
 						{10,8,-7,9}};
 		
-		int[][] a = {{1,2,3}};
-		int[][] b = {{1},
+		double[][] a = {{1,2,3}};
+		double[][] b = {{1},
 				{2},
 				{3}
 		};
@@ -34,6 +34,7 @@ public class LSA_Test
 		
 		Matrix AB = A.multiply(B);
 		AB.print();
+		System.out.println();
 		
 		long endTime = System.currentTimeMillis();
 		System.out.println("The program took " + (endTime - startTime) + " ms to compile."); 
