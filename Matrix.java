@@ -31,16 +31,14 @@ public class Matrix
 	/**
 	 * Inplace addition of two matricies.
 	 * 
-	 * @param other
-	 *            - the other matrix that adds upon our given matrix
+	 * @param other - the other matrix that adds upon our given matrix
 	 */
 	public void add(Matrix other)
 	{
 		if (mat.length != other.mat.length || mat[0].length != other.mat.length)
 		{
-			System.out.println("The matrix product cannot be"
+			throw new IllegalArgumentException("The matrix sum cannot be"
 					+ " computed due to mismatched matrix dimensions.");
-			return;
 		}
 		for (int i = 0; i < mat.length; i++)
 			for (int j = 0; j < mat[0].length; j++)
@@ -86,6 +84,21 @@ public class Matrix
 					AB[i][j] += mat[i][k] * other.mat[k][j];
 
 		return new Matrix(AB);
+	}
+	
+	public void getEigenvectors()
+	{
+		
+	}
+	
+	/**
+	 * Useful for creating document-document and term-term symmetrical n x n matricies.
+	 * @return
+	 */
+	public Matrix createSymmetric()
+	{
+		Matrix A_T = transpose();
+		return multiply(A_T);
 	}
 
 	public void print()

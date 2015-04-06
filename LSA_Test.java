@@ -36,6 +36,10 @@ public class LSA_Test
 		AB.print();
 		System.out.println();
 		
+		Matrix AA_T = mn.createSymmetric();
+		AA_T.print();
+		System.out.println();
+		
 		long endTime = System.currentTimeMillis();
 		System.out.println("The program took " + (endTime - startTime) + " ms to compile."); 
 	}
