@@ -86,6 +86,49 @@ public class Matrix
 		return new Matrix(AB);
 	}
 	
+	public double determinant()
+	{
+		if ( mat.length != mat[0].length ) //must be square
+			throw new IllegalArgumentException("The matrix determinant cannot be"
+					+ " computed for non-square matricies.");
+		return determinant(mat, mat.length);
+	}
+	
+	private double determinant(double b[][], int m)
+	{
+		double c[][] = new double[m][m];
+
+		int i, j, k;
+		double sum = 0;
+		if (m == 1)
+			sum = b[0][0]; 
+		else if (m == 2)
+			sum = ((b[0][0] * b[1][1]) - (b[0][1] * b[1][0])); 
+		else
+		{
+			for (int p = 0; p < m; p++)
+			{
+				int h = 0;
+				k = 0;
+				for (i = 1; i < m; i++)
+					for (j = 0; j < m; j++)
+					{
+						if (j == p)
+							continue;
+						c[h][k] = b[i][j];
+						k++;
+						if (k == m - 1)
+						{
+							h++;
+							k = 0;
+						}
+					}
+				sum = sum + b[0][p] * Math.pow((-1), p) * determinant(c, m - 1);
+			}
+		}
+		return sum;
+	}
+	
 	public void getEigenvectors()
 	{
 		

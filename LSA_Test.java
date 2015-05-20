@@ -40,6 +40,8 @@ public class LSA_Test
 		AA_T.print();
 		System.out.println();
 		
+		System.out.println(AA_T.determinant());
+		
 		long endTime = System.currentTimeMillis();
 		System.out.println("The program took " + (endTime - startTime) + " ms to compile."); 
 	}
