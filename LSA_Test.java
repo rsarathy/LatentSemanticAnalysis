@@ -18,6 +18,10 @@ public class LSA_Test
 				{3}
 		};
 		
+		double[][] rref = {{1,0,0,-8},
+							{2,3,-1,-11},
+							{-2,0,-3,22}};
+		
 		Matrix mn = new Matrix(arr);
 		mn.print();
 		System.out.println();
@@ -41,6 +45,12 @@ public class LSA_Test
 		System.out.println();
 		
 		System.out.println(AA_T.determinant());
+		
+		Matrix RREF = new Matrix(rref);
+		RREF.toRREF();
+		RREF.print();
+		
+//		AA_T.getEigenvectors();
 		
 		long endTime = System.currentTimeMillis();
 		System.out.println("The program took " + (endTime - startTime) + " ms to compile."); 

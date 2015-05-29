@@ -4,10 +4,7 @@ public class Matrix
 
 	public Matrix(double[][] newA)
 	{
-		mat = new double[newA.length][newA[0].length];
-		for (int i = 0; i < mat.length; i++)
-			for (int j = 0; j < mat[0].length; j++)
-				mat[i][j] = newA[i][j];
+		mat = newA;
 	}
 
 	public Matrix transpose()
@@ -129,14 +126,85 @@ public class Matrix
 		return sum;
 	}
 	
+	public void toRREF()
+	{
+		int lead = 0;
+		int row = mat[0].length;
+		int col = mat.length;
+		
+		for ( int r = 0; r < row; r++ )
+		{
+			if ( col <= lead )
+				break;
+			int i = r;
+			while(mat[i][lead] == 0)
+			{
+				i++;
+				if ( i == row )
+				{
+					i = r;
+					lead++;
+					if ( col == lead )
+					{
+						lead--;
+						break;
+					}
+				}
+				for ( int c = 0; c < col; c++ )
+				{
+					double temp = mat[r][c];
+					mat[r][c] = mat[i][c];
+					mat[i][c] = temp;
+				}
+				double div = mat[r][lead];
+				if ( div != 0 )
+					for ( int j = 0; j < col; j++ )
+						mat[r][j] /= div;
+				for ( int j = 0; j < row; j++ )
+					if ( j != r )
+					{
+						double sub = mat[j][lead];
+						for ( int k = 0; k < col; k++ )
+							mat[j][k] -= (sub * mat[r][k]);
+					}
+				lead++;
+			}
+		}
+	}
+	
 	public void getEigenvectors()
 	{
+		System.out.println("Enter eigenvalues of the matrix: ");
+		String eiVals = TextIO.getln();
+	}
+	
+	public void SingularValueDecomposition()
+	{
+		double[][] U, V;
+		double[] S;
+		
+		int m = mat[0].length;
+		int n = mat.length;
+		
+		S = new double[Math.min(m+1, n)];
+		U = new double[m][n];
+		V = new double[n][n];
+		
+		double[] e = new double[n];
+		double[] work = new double[m];
+		
+		
+		
+		if ( m < n )
+			throw new IllegalArgumentException("SVD cannot be calculated for m < n.");
+		
 		
 	}
 	
+	
 	/**
 	 * Useful for creating document-document and term-term symmetrical n x n matricies.
-	 * @return
+	 * @return A*A^T
 	 */
 	public Matrix createSymmetric()
 	{
